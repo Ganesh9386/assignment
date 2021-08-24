@@ -15,11 +15,9 @@ export class AllCandidatesComponent implements OnInit {
   ngOnInit(): void {
     this.data = this.comman.candidate_data;
 
-    for(let d of this.data){
-      if(d.department!='Development'){
-        this.newData.push({id : d.id, name : d.name, department : d.department,joining_date:d.joining_date});
-      }
-    }
+    this.newData = this.data.filter((res : any)=>{
+      return res.department!='Development'
+    })
   }
 
 }
