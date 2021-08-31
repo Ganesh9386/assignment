@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Add Item</h3>
+                    <form [formGroup]="form" (ngSubmit)="saveItem()">
+                        <div class="form-group">
+                            <label>Item Name :</label>
+                            <input type="text" class="form-control" formControlName="item_name">
+                            <div class="text-danger" *ngIf="f.item_name.invalid && f.item_name.touched">
+                                <p *ngIf="f.item_name.errors?.required">Item Name is required.....</p>
+                                <p *ngIf="f.item_name.errors?.pattern">Accept only alphabet</p>
+                                <p *ngIf="f.item_name.errors?.minlength && !f.item_name.errors?.pattern">Item name should be atleast 3 character</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Item Price :</label>
+                            <input type="text" class="form-control" formControlName="item_price">
+                             <div class="text-danger" *ngIf="f.item_price.invalid && f.item_price.touched">
+                                <p *ngIf="f.item_price.errors?.required">Item Price is required.....</p>
+                                <p *ngIf="f.item_price.errors?.pattern">Accept only Numeric value</p>
+                                <p *ngIf="f.item_price.errors?.maxlength && !f.item_price.errors?.pattern">max length is only 6 digit</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Category :</label>
+                            <select class="form-control" formControlName="category">
+                                <option value="">Select</option>
+                                <option *ngFor="let item of category" value="{{item.category_id}}">{{item.category}}</option>
+                            </select>
+                            <div class="text-danger" *ngIf="f.category.invalid && f.category.touched">
+                                <p *ngIf="f.category.errors?.required">Item Category is required.....</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Item Description :</label>
+                            <textarea class="form-control" formControlName="description"></textarea>
+                            <div class="text-danger" *ngIf="f.description.invalid && f.description.touched">
+                                <p *ngIf="f.description.errors?.required">Item Description is required.....</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Save</button>&nbsp;
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
